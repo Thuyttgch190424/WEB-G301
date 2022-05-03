@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<div class="container-fluid col-md-8 text-center">
+		<h2 class="text text-success mb-4">Course List</h2>
+		<table class="table table-info table-hover mt-5">
+			<tr>
+				<th>Id</th>
+				<th>Course Name</th>
+				<th>Course Image</th>
+				<th>Description</th>
+				{# <th>Grade</th> #}
+				<th>Teacher Name</th>
+				<th>Student ID</th>
+
+				<th>Actions</th>
+			</tr>
+			{% for course in courses %}
+				<tr>
+					<td>{{ course.id }}</td>
+					<td>{{ course.name }}</td>
+					<td>
+						<a href="{{ path('course_detail', {'id' : course.id })}} ">
+							<img src="{{ course.image }}" width="100" height="100">
+						</a>
+					</td>
+					<td>{{ course.description }}</td>
+
+
+					{# <td>
+						{% if course.grades != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
+								{{ course.grades.grade }}
+							</a>
+						{% endif %}
+					</td> #}
+					<td>
+						{% if course.teachers != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
+                                {% for teacher in course.teachers %}
+                                    {{teacher.name}} , 
+                                {% endfor %}
+								
+							</a>
+						{% endif %}
+					</td>
+					<td>
+						{% if course.students != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
+								{% for student in course.students %}
+                                    {{student.studentId}} , 
+                                {% endfor %}
+							</a>
+						{% endif %}
+					</td>
+
+					<td>
+						<a class="btn btn-success" href="{{ path('course_detail', {'id' : course.id })}}">DETAIL</a>
+						<a class="btn btn-warning" href="{{ path('edit_course', {'id' : course.id })}}">EDIT</a>
+						<a class="btn btn-danger" onclick="return confirm('Do you want to delete this course ?');" href="{{ path('delete_course', {'id' : course.id })}}">DELETE</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container col-md-8 text-center">
+		<h2 class="text-success md-3">Course Name:
+			{{ course.name }}</h2>
+		<div class="row">
+
+			<div class="col">
+				<img src="{{ course.image }}" width="200" height="200">
+			</div>
+			<div class="col">
+				<h5 class="text-info">Description:
+					{{ course.description }}</h5>
+				<h5 class="text-warning">Email:
+					{{ course.email }}</h5>
+				<div class="col">
+					<h5 class="text-warning">Grade:
+						{% if coure.grades != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+								{{ course.grades.grade }}
+							</a>
+						{% endif %}
+					</h5>
+				</div>
+				<div class="col">
+					<h5 class="text-warning">Teacher Name:
+						{% if course.teachers != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+								{{ course.teachers.name }}
+							</a>
+						{% endif %}
+					</h5>
+				</div>
+				<div class="col">
+					<h5 class="text-warning">
+						Student ID:
+						{% if coure.students != null %}
+							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+								{{ course.students.studentId }}
+							</a>
+						{% endif %}
+					</h5>
+				</div>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% form_theme courseForm 'bootstrap_5_layout.html.twig' %}
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container col-md-7 text-center">
+    <h2 class="text text-warning">Add new Course</h2>
+    {{ form_start (courseForm) }}
+    {{ form_end (courseForm) }}
+    </div>
+{% endblock %}
