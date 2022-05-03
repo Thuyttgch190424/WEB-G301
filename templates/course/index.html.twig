@@ -10,10 +10,7 @@
 				<th>Course Name</th>
 				<th>Course Image</th>
 				<th>Description</th>
-				{# <th>Grade</th> #}
 				<th>Teacher Name</th>
-				<th>Student ID</th>
-
 				<th>Actions</th>
 			</tr>
 			{% for course in courses %}
@@ -27,14 +24,6 @@
 					</td>
 					<td>{{ course.description }}</td>
 
-
-					{# <td>
-						{% if course.grades != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
-								{{ course.grades.grade }}
-							</a>
-						{% endif %}
-					</td> #}
 					<td>
 						{% if course.teachers != null %}
 							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
@@ -45,16 +34,6 @@
 							</a>
 						{% endif %}
 					</td>
-					<td>
-						{% if course.students != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
-								{% for student in course.students %}
-                                    {{student.studentId}} , 
-                                {% endfor %}
-							</a>
-						{% endif %}
-					</td>
-
 					<td>
 						<a class="btn btn-success" href="{{ path('course_detail', {'id' : course.id })}}">DETAIL</a>
 						<a class="btn btn-warning" href="{{ path('edit_course', {'id' : course.id })}}">EDIT</a>
