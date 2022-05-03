@@ -4,6 +4,7 @@
 {% block body %}
 	<div class="container-fluid col-md-8 text-center">
 		<h2 class="text text-success mb-4">Course List</h2>
+		<a class="btn btn-primary mb-3" href="{{ path('add_course')}}">ADD COURSE</a>
 		<table class="table table-info table-hover mt-5">
 			<tr>
 				<th>Id</th>
@@ -28,7 +29,7 @@
 						{% if course.teachers != null %}
 							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
                                 {% for teacher in course.teachers %}
-                                    {{teacher.name}} , 
+                                    {{teacher.name}}, 
                                 {% endfor %}
 								
 							</a>
