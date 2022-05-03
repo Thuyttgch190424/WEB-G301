@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student
@@ -36,7 +36,7 @@ class Student
     #[ORM\OneToMany(mappedBy: 'student', targetEntity: Grade::class)]
     private $grades;
 
-    #[ORM\ManyToMany(targetEntity: course::class, inversedBy: 'students')]
+    #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'students')]
     private $courses;
 
     public function __construct()
@@ -153,14 +153,14 @@ class Student
     }
 
     /**
-     * @return Collection<int, course>
+     * @return Collection<int, Course>
      */
     public function getCourses(): Collection
     {
         return $this->courses;
     }
 
-    public function addCourse(course $course): self
+    public function addCourse(Course $course): self
     {
         if (!$this->courses->contains($course)) {
             $this->courses[] = $course;
@@ -169,7 +169,7 @@ class Student
         return $this;
     }
 
-    public function removeCourse(course $course): self
+    public function removeCourse(Course $course): self
     {
         $this->courses->removeElement($course);
 

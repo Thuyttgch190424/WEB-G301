@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="container col-md-8 text-center">
+   <h2 class="text-success mb-3">Student Name: {{ student.name }} </h2>
+   <div class="row">
+      <div class="col">
+         <img src="{{ student.image }}" width=200 height=200>
+      </div>
+      <div class="col">
+        <h5 class="text-info">Student ID: {{ student.studentId }}</h5>
+        {# <h5 class="text-warning">Genre: 
+            {% if book.genre != null %}
+               <a class="text text-success" href="{{ path('genre_detail' , {'id' : book.genre.id})}}">
+                  {{ book.genre.name }}
+               </a>             
+            {% endif %}
+        </h5> #}
+        <h5 class="text-warning">Email: {{ student.email }}</h5>
+        <h5 class="text-danger">Phone: {{ student.phone }}</h5>
+        <h5 class="text-monospace">Birthday: {{ student.birthday | date('d/m/Y') }}</h5>
+      </div>
+   </div>
+</div>
+{% endblock %}

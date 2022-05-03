@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container col-md-8 text-center mt-5">
+		<h2 class="text-success mb-3">Student ID:
+			{{ grade.student.studentId }}
+		</h2>
+		<div class="row mt-5">
+			<div class="col">
+				<h5 class="text-primary">Course Name:
+                    {% if grade.course != null %}
+                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                            {{ grade.course.name }}
+                        </a>   
+                    {% endif %}
+					</h5>
+			</div>
+			<div class="col">
+				<h5 class="text-info">Grade:
+					{{ grade.grade }}</h5>
+			</div>
+			<div class="col">
+				<h5 class="text-warning">Marked by:
+                    {% if grade.teacher != null %}
+                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                            {{ grade.teacher.name }}
+                        </a>   
+                    {% endif %}
+					</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+				<h5 class="text-danger">Comment:
+					{{ grade.comment }}</h5>
+			</div>
+		</div>
+	</div>
+{% endblock %}
