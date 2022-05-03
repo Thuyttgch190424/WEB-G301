@@ -10,8 +10,8 @@
 				<img src="{{ teacher.image }}" width="200" height="200">
 			</div>
 			<div class="col">
-				<h5 class="text-info">Teacher ID:
-					{{ teacher.teacherId }}</h5>
+				<h5 class="text-info">Teacher Name:
+					{{ teacher.name }}</h5>
 				<h5 class="text-warning">Email:
 					{{ teacher.email }}</h5>
 				<h5 class="text-danger">Phone:
@@ -19,9 +19,12 @@
 				<h5 class="text-monospace">Birthday:
 					{{ teacher.birthday | date('d/m/Y') }}</h5>
 				<h5 class="text-monospace">Course:
-					{% if teacher.courses != null %}
-						<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
-							{{ teacher.courses.name }}
+					{% if teacher.course != null %}
+						<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : teacher.id })}}">
+							{% for course in teacher.course %}
+								{{course.name}} ,
+							{% endfor %}
+							
 						</a>
 					{% endif %}
 				</h5>
