@@ -2,7 +2,7 @@
 
 {% block body %}
 <div class="container-fluid col-md-8 text-center">
-    <h2 class="text text-success mb-4">Student List</h2>
+    <h2 class="text text-success mb-4">Grade List</h2>
     <a class="btn btn-primary mb-3" href="{{ path('add_grade')}}">ADD GRADE</a>
     {# {% if is_granted('ROLE_ADMIN') %}
        <a class="btn btn-primary mb-3" href="{{ path('book_add')}}">ADD</a>
@@ -22,16 +22,16 @@
     </h3> #}
     <table class="table table-info table-hover mt-5">
         <tr>
-            <th>Id
-                {# <select onchange="window.location.href=this.value">
-                    <option>Sort</option>
-                    <option value="{{ path('book_asc')}}">Ascending</option>
-                    <option value="{{ path('book_desc')}}">Descending</option>
-                </select>        #}
-            </th>
+            <th>Id</th>
             <th>Student ID</th>
             <th>Course Name</th>
-            <th>Grade</th>
+            <th>Grade
+                <select onchange="window.location.href=this.value">
+                    <option>Sort</option>
+                    <option value="{{ path('grade_asc')}}">Ascending</option>
+                    <option value="{{ path('grade_desc')}}">Descending</option>
+                </select>       
+            </th>
             <th>Teacher Name</th>
             {# <th>Book Genre
                 <select onchange="window.location.href=this.value">
@@ -65,7 +65,7 @@
                 <td>
                     {% if grade.teacher != null %}
                         <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
-                            {{ grade.teacher.name }}
+                            {{ grade.teacher.name }} 
                         </a>   
                     {% endif %}
                 </td>

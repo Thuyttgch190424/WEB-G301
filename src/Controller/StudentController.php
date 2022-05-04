@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Student;
 use App\Form\StudentType;
+use App\Repository\StudentRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/student')]
 class StudentController extends AbstractController
@@ -33,8 +35,8 @@ class StudentController extends AbstractController
         $student = new Student;
         $form = $this->createForm(StudentType::class, $student);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) { 
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager = $managerRegistry->getManager();
             $manager->persist($student);
             $manager->flush();
@@ -59,7 +61,7 @@ class StudentController extends AbstractController
 
         return $this->render('student/detail.html.twig', [
             'student' => $student,
-            
+
         ]);
     }
 
@@ -67,7 +69,7 @@ class StudentController extends AbstractController
     public function student_Delete($id, ManagerRegistry $managerRegistry)
     {
         $student = $managerRegistry->getRepository(Student::class)->find($id);
-        if (!$student){
+        if (!$student) {
             $this->addFlash("Error", "Student not found !");
             return $this->redirectToRoute("student_index");
         }
@@ -76,14 +78,13 @@ class StudentController extends AbstractController
         $manager->flush();
         $this->addFlash("Success", "Student deleted successfully !");
         return $this->redirectToRoute("student_index");
-        
-}
+    }
 
     #[Route('/edit/{id}', name: 'edit_student')]
     public function studentEdit($id, Request $request, ManagerRegistry $managerRegistry)
     {
         $student = $managerRegistry->getRepository(Student::class)->find($id);
-        if (!$student){
+        if (!$student) {
             $this->addFlash("Error", "Student not found !");
             return $this->redirectToRoute("student_index");
         }
@@ -103,4 +104,14 @@ class StudentController extends AbstractController
             ]
         );
     }
+
+   #[Route('/search', name: 'student_search')]
+   public function search (Request $request, StudentRepository $studentRepository, ManagerRegistry $registry) {
+       $keyword = $request->get('name');
+       $students = $studentRepository->search($keyword);
+       return $this->render("student/index.html.twig",
+                            [
+                                'students' => $students,
+                            ]);
+   }
 }

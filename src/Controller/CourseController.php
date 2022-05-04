@@ -4,13 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Course;
 use App\Form\CourseType;
+use App\Repository\CourseRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 #[Route('/course')]
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class CourseController extends AbstractController
 {
     #[Route('/', name: 'course_index')]
@@ -99,4 +105,14 @@ class CourseController extends AbstractController
             ]
         );
     }
+
+    #[Route('/search', name: 'course_search')]
+   public function search (Request $request, CourseRepository $courseRepository, ManagerRegistry $registry) {
+       $keyword = $request->get('name');
+       $courses = $courseRepository->search($keyword);
+       return $this->render("course/index.html.twig",
+                            [
+                                'courses' => $courses,
+                            ]);
+   }
 }

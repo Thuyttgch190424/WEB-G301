@@ -64,6 +64,20 @@ class TeacherRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * @return Teacher[]  
+     */
+    public function search($keyword)
+    {
+        return $this->createQueryBuilder('teacher')
+            ->andWhere('teacher.name LIKE :key')
+            ->setParameter('key', '%' . $keyword . '%')
+            ->orderBy('teacher.name', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Teacher
     {

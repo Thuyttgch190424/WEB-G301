@@ -64,6 +64,20 @@ class CourseRepository extends ServiceEntityRepository
     }
     */
 
+    /**
+     * @return Course[]  
+     */
+    public function search($keyword)
+    {
+        return $this->createQueryBuilder('course')
+            ->andWhere('course.name LIKE :key')
+            ->setParameter('key', '%' . $keyword . '%')
+            ->orderBy('course.name', 'ASC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Course
     {
