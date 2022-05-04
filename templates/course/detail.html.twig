@@ -6,39 +6,33 @@
 			{{ course.name }}</h2>
 		<div class="row">
 
-			<div class="col">
+			<div class="col mt-5">
 				<img src="{{ course.image }}" width="200" height="200">
 			</div>
-			<div class="col">
+			<div class="col pt-5">
 				<h5 class="text-info">Description:
 					{{ course.description }}</h5>
-				<h5 class="text-warning">Email:
-					{{ course.email }}</h5>
-				<div class="col">
-					<h5 class="text-warning">Grade:
-						{% if coure.grades != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
-								{{ course.grades.grade }}
-							</a>
-						{% endif %}
-					</h5>
-				</div>
 				<div class="col">
 					<h5 class="text-warning">Teacher Name:
 						{% if course.teachers != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
-								{{ course.teachers.name }}
-							</a>
+							{% for teacher in course.teachers %}
+								<a class="text text-success text-decoration-none" href="{{ path('teacher_detail', {'id' : teacher.id })}}">
+									{{ teacher.name }}
+								</a>
+							{% endfor %}
+
 						{% endif %}
 					</h5>
 				</div>
 				<div class="col">
-					<h5 class="text-warning">
-						Student ID:
-						{% if coure.students != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
-								{{ course.students.studentId }}
-							</a>
+					<h5 class="text-danger">
+						Students participating in the course:
+						{% if course.students != null %}
+							{% for student in course.students %}
+								<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : student.id })}}">
+									{{ student.studentId }}
+								</a>
+							{% endfor %}
 						{% endif %}
 					</h5>
 				</div>

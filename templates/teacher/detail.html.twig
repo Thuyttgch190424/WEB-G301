@@ -20,12 +20,10 @@
 					{{ teacher.birthday | date('d/m/Y') }}</h5>
 				<h5 class="text-monospace">Course:
 					{% if teacher.course != null %}
-						<a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : teacher.id })}}">
-							{% for course in teacher.course %}
-								{{course.name}} ,
-							{% endfor %}
-							
-						</a>
+						{% for course in teacher.course %}
+							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">{{course.name}} ,</a>
+						{% endfor %}
+						
 					{% endif %}
 				</h5>
 

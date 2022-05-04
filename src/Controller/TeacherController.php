@@ -76,7 +76,7 @@ class TeacherController extends AbstractController
         $this->addFlash("Success", "Teacher deleted successfully !");
         return $this->redirectToRoute("teacher_index");
     }
-    #[Route('edit/{id}', name: 'edit_teacher')]
+    #[Route('/edit/{id}', name: 'edit_teacher')]
     public function teacher_Edit($id, Request $request, ManagerRegistry $managerRegistry)
     {
         $teacher = $managerRegistry->getRepository(teacher::class)->find($id);

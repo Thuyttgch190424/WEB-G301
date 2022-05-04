@@ -49,14 +49,14 @@
                 <td>{{ grade.id }}</td>
                 <td>
                     {% if grade.student != null %}
-                        <a class="text text-success text-decoration-none" href="{{ path('grade_detail', {'id' : grade.id })}}">
+                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.student.id })}}">
                             {{ grade.student.studentId }}
                         </a>   
                     {% endif %}
                 </td>
                 <td>
                     {% if grade.course != null %}
-                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                        <a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : grade.course.id })}}">
                             {{ grade.course.name }}
                         </a>   
                     {% endif %}
@@ -64,7 +64,7 @@
                 <td>{{ grade.grade }}</td>
                 <td>
                     {% if grade.teacher != null %}
-                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                        <a class="text text-success text-decoration-none" href="{{ path('teacher_detail', {'id' : grade.teacher.id })}}">
                             {{ grade.teacher.name }} 
                         </a>   
                     {% endif %}

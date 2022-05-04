@@ -78,6 +78,18 @@ class CourseRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @return Course[]  
+     */
+    public function checkName($keyword)
+    {
+        return $this->createQueryBuilder('course')
+            ->andWhere('course.name = :key')
+            ->setParameter('key', $keyword)
+            ->getQuery()
+            ->getResult();
+    }
+
     /*
     public function findOneBySomeField($value): ?Course
     {

@@ -33,18 +33,23 @@ class CourseController extends AbstractController
         ]);
     }
     #[Route('/add', name: 'add_course')]
-    public function add_course(Request $request, ManagerRegistry $managerRegistry)
+    public function add_course(Request $request, ManagerRegistry $managerRegistry, CourseRepository $courseRepository)
     {
         $course = new Course;
         $form = $this->createForm(CourseType::class, $course);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $manager = $managerRegistry->getManager();
-            $manager->persist($course);
-            $manager->flush();
-            $this->addFlash("Success", "Course added successfully !");
-            return $this->redirectToRoute('course_index');
+            if (!($courseRepository->checkName($form["username"]->getData()))) {
+                $manager = $managerRegistry->getManager();
+                $manager->persist($course);
+                $manager->flush();
+                $this->addFlash("Success", "Course added successfully !");
+                return $this->redirectToRoute('course_index');
+            } else {
+                $this->addFlash("Error", "Duplicate course name !");
+                return $this->redirectToRoute('add_course');
+            }
         }
         return $this->renderForm('course/add.html.twig', [
             'courseForm' => $form
@@ -107,12 +112,15 @@ class CourseController extends AbstractController
     }
 
     #[Route('/search', name: 'course_search')]
-   public function search (Request $request, CourseRepository $courseRepository, ManagerRegistry $registry) {
-       $keyword = $request->get('name');
-       $courses = $courseRepository->search($keyword);
-       return $this->render("course/index.html.twig",
-                            [
-                                'courses' => $courses,
-                            ]);
-   }
+    public function search(Request $request, CourseRepository $courseRepository, ManagerRegistry $registry)
+    {
+        $keyword = $request->get('name');
+        $courses = $courseRepository->search($keyword);
+        return $this->render(
+            "course/index.html.twig",
+            [
+                'courses' => $courses,
+            ]
+        );
+    }
 }

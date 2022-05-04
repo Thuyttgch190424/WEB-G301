@@ -25,20 +25,17 @@
 					<td>{{ course.id }}</td>
 					<td>{{ course.name }}</td>
 					<td>
-						<a href="{{ path('course_detail', {'id' : course.id })}} ">
-							<img src="{{ course.image }}" width="100" height="100">
-						</a>
+						
+						<img src="{{ course.image }}" width="100" height="100">
+						
 					</td>
 					<td>{{ course.description }}</td>
 
 					<td>
-						{% if course.teachers != null %}
-							<a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : course.id })}}">
-								{% for teacher in course.teachers %}
-									{{teacher.name}} 
-								{% endfor %}
-
-							</a>
+						{% if course.teachers != null %}			
+							{% for item in course.teachers %}
+								<a class="text text-success text-decoration-none" href="{{ path('teacher_detail', {'id' : item.id })}}">{{item.name}}, </a>
+							{% endfor %}
 						{% endif %}
 					</td>
 					<td>

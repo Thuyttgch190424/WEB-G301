@@ -9,7 +9,7 @@
 			<div class="col">
 				<h5 class="text-primary">Course Name:
                     {% if grade.course != null %}
-                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                        <a class="text text-success text-decoration-none" href="{{ path('course_detail', {'id' : grade.course.id })}}">
                             {{ grade.course.name }}
                         </a>   
                     {% endif %}
@@ -22,7 +22,7 @@
 			<div class="col">
 				<h5 class="text-warning">Marked by:
                     {% if grade.teacher != null %}
-                        <a class="text text-success text-decoration-none" href="{{ path('student_detail', {'id' : grade.id })}}">
+                        <a class="text text-success text-decoration-none" href="{{ path('teacher_detail', {'id' : grade.teacher.id })}}">
                             {{ grade.teacher.name }}
                         </a>   
                     {% endif %}
