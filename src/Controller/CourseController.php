@@ -40,7 +40,7 @@ class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!($courseRepository->checkName($form["username"]->getData()))) {
+            if (!($courseRepository->checkName($form["name"]->getData()))) {
                 $manager = $managerRegistry->getManager();
                 $manager->persist($course);
                 $manager->flush();
