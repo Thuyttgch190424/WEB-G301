@@ -8,8 +8,11 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-						           and uncomment the following Encore helpers to start using Symfony UX #}
+																												           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
+			<script src="https://kit.fontawesome.com/ad9d9b1f44.js" crossorigin="anonymous"></script>
+			<link
+			rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 			<!-- Bootstrap -->
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		{% endblock %}
@@ -17,75 +20,135 @@
 		{% block javascripts %}
 			{#{{ encore_entry_script_tags('app') }}#}
 		{% endblock %}
+
+		<style>
+			body {
+				background-image: url("data:image/jpeg;base64,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");
+				background-repeat: no-repeat;
+				background-size: cover;
+				
+			}
+
+			{# footer {
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				height: 140px;
+				padding: 0px;
+			} #}
+		</style>
 	</head>
-	<body>
-		{# navigation bar #}
-		{% block nav %}
-			<ul class="nav justify-content-center|justify-content-end">
+</html></head><body>
+{# navigation bar #}
+{% block nav %}
+	<nav class="navbar navbar-expand-sm bg-success navbar-dark">
+		<div class="container-fluid">
+			<ul class="navbar-nav">
 				<h1>
-					<li class="nav-tabs">
-						<a class="nav-link" href="{{ path('home')}}">Home</a>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('home')}}">Home</a>
 					</li>
 				</h1>
 				<h1>
-					<li class="nav-tabs">
+					<li class="nav-item">
 						<a class="nav-link" href="{{ path('student_index')}}">Student</a>
 					</li>
 				</h1>
 				{% if is_granted('ROLE_ADMIN') %}
 					<h1>
-						<li class="nav-tabs">
+						<li class="nav-item">
 							<a class="nav-link" href="{{ path('grade_index')}}">Grade</a>
 						</li>
 					</h1>
 				{% endif %}
-
 				{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_STAFF')%}
 					<h1>
-						<li class="nav-tabs">
+						<li class="nav-item">
 							<a class="nav-link" href="{{ path('teacher_index')}}">Teacher</a>
 						</li>
 					</h1>
 				{% endif %}
-
 				{% if is_granted('ROLE_ADMIN') %}
 					<h1>
-						<li class="nav-tabs">
+						<li class="nav-item">
 							<a class="nav-link" href="{{ path('course_index')}}">Course</a>
 						</li>
 					</h1>
 				{% endif %}
-
 				<h1>
-					<li class="nav-tabs">
-						<a class="nav-link" href="{{ path('app_logout')}}">Logout
-							<i style="color: red">
-								({{ app.user.username }})
-							</i>
-						</a>
+					<li class="nav-item">
+						<div class="container-fluid">
+							<a class="navbar-brand" href="{{ path('app_logout')}}"> 
+      							<img src="https://www.w3schools.com/bootstrap5/img_avatar1.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+								Logout <i style="color: red">
+									({{ app.user.username }})
+								</i> 
+    						</a>
+						</div>
 					</li>
 				</h1>
-				{# {% if is_granted('ROLE_STAFF') %}
-												            <h1><li class="nav-tabs">
-												                <a class="nav-link" href="{{ path('student_index')}}">Genre</a>
-												            </li></h1>
-												            {% endif %} #}
-				{# <h1><li class="nav-tabs">
-												                <a class="nav-link" href="{{ path('app_logout')}}">Logout <i> ({{ app.user.username }}) </i> </a>
-												            </li></h1> #}
 			</ul>
-		{% endblock %}
-		{# show flash message #}
-		{% block flash %}
-			<div class="container-md col-md-5 mt-3 text-center">
-				{% for message in app.session.flashBag.get('Success') %}
-					<p class="alert alert-success">{{ message }}</p>
-				{% endfor %}
-				{% for message in app.session.flashBag.get('Error') %}
-					<p class="alert alert-danger">{{ message }}</p>
-				{% endfor %}
-			</div>
-		{% endblock %}
-		{% block body %}{% endblock %}
+		</div>
+	</nav>
+
+
+	{# {% if is_granted('ROLE_STAFF') %}
+																											            <h1><li class="nav-tabs">
+																											                <a class="nav-link" href="{{ path('student_index')}}">Genre</a>
+																											            </li></h1>
+																											            {% endif %} #}
+	{# <h1><li class="nav-tabs">
+																											                <a class="nav-link" href="{{ path('app_logout')}}">Logout <i> ({{ app.user.username }}) </i> </a>
+																											            </li></h1> #}
+</body></ul>{% endblock %}{# show flash message #}{% block flash %}<div class="container-md col-md-5 mt-3 text-center">
+{% for message in app.session.flashBag.get('Success') %}
+	<p class="alert alert-success">{{ message }}</p>
+{% endfor %}
+{% for message in app.session.flashBag.get('Error') %}
+	<p class="alert alert-danger">{{ message }}</p>
+{% endfor %}</div>{% endblock %}{% block body %}{% endblock %}
+{# {% block footer %}<footer
+class="bg-dark text-center text-white">
+<!-- Grid container -->
+<div
+	class="container p-4 pb-0">
+	<!-- Section: Social media -->
+	<section
+		class="mb-4">
+		<!-- Facebook -->
+		<a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/profile.php?id=100009727354856" role="button">
+			<i class="fab fa-facebook-f"></i>
+		</a>
+
+		<!-- Twitter -->
+		<a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+			<i class="fab fa-twitter"></i>
+		</a>
+
+		<!-- Google -->
+		<a class="btn btn-outline-light btn-floating m-1" href="#!" role="button">
+			<i class="fab fa-google"></i>
+		</a>
+
+		<!-- Instagram -->
+		<a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/quyennx102/" role="button">
+			<i class="fab fa-instagram"></i>
+		</a>
+
+		<!-- Github -->
+		<a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Thuyttgch190424/WEB-G301" role="button">
+			<i class="fab fa-github"></i>
+		</a>
+	</section>
+	<!-- Section: Social media -->
+</div>
+<!-- Grid container -->
+
+<!-- Copyright -->
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+	© 2022 Copyright:
+	<a class="text-white" href="https://greenwich.edu.vn/">Geenwich Viet Nam</a>
+</div>
+<!-- Copyright --></footer>{% endblock %} #}
 	</body>
 </html>

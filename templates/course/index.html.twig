@@ -3,13 +3,13 @@
 
 {% block body %}
 	<div class="container-fluid col-md-8 text-center">
-		<h2 class="text text-success mb-4">Course List</h2>
+		<h2 class="text text-primary mb-4">Course List</h2>
 		{% if is_granted('ROLE_STAFF') or is_granted('ROLE_ADMIN') %}
 			<a class="btn btn-primary mb-3" href="{{ path('add_course')}}">ADD COURSE</a>
 		{% endif %}
 		<form action="{{ path('course_search') }}" method="post">
 			<input type="search" name="name" id="">
-			<input class="btn btn-success" type="submit" value="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 		<table class="table table-info table-hover mt-5">
 			<tr>

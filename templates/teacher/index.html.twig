@@ -2,7 +2,7 @@
 
 {% block body %}
 	<div class="container-fluid col-md-8 text-center">
-		<h2 class="text text-success mb-4">Teacher List</h2>
+		<h2 class="text text-primary mb-4">Teacher List</h2>
 		<a class="btn btn-primary mb-3" href="{{ path('add_teacher')}}">ADD TEACHER</a>
 		<h3 class="text text-warning mt-3">
 			{% set total = teachers|length %}
@@ -15,7 +15,7 @@
 		</h3>
 		<form action="{{ path('teacher_search') }}" method="post">
 			<input type="search" name="name" id="">
-			<input class="btn btn-success" type="submit" value="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 		<table class="table table-info table-hover mt-5">
 			<tr>

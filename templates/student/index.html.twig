@@ -2,14 +2,14 @@
 
 {% block body %}
 	<div class="container-fluid col-md-8 text-center">
-		<h2 class="text text-success mb-4">Student List</h2>
+		<h2 class="text text-primary mb-4">Student List</h2>
 
 		{% if is_granted('ROLE_STAFF') or is_granted('ROLE_ADMIN') %}
 			<a class="btn btn-primary mb-3" href="{{ path('add_student')}}">ADD STUDENT</a>
 		{% endif %}
 		<form action="{{ path('student_search') }}" method="post">
 			<input type="search" name="name" id="">
-			<input class="btn btn-success" type="submit" value="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 		{# <h3 class="text text-danger mt-3">
 				    {% set total = books|length %}
