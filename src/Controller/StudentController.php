@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Course;
 use App\Entity\Student;
 use App\Form\StudentType;
 use App\Repository\StudentRepository;
@@ -9,8 +10,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/student')]
 class StudentController extends AbstractController
@@ -19,6 +20,7 @@ class StudentController extends AbstractController
     public function student_index(ManagerRegistry $managerRegistry)
     {
         $students = $managerRegistry->getRepository(Student::class)->findAll();
+        $courses = $managerRegistry->getRepository(Course::class)->findAll();
         if (!$students) {
             throw $this->createNotFoundException(
                 'No students found in the database.'
@@ -26,6 +28,7 @@ class StudentController extends AbstractController
         }
         return $this->render('student/index.html.twig', [
             'students' => $students,
+            'courses' => $courses
         ]);
     }
 
@@ -112,6 +115,37 @@ class StudentController extends AbstractController
        return $this->render("student/index.html.twig",
                             [
                                 'students' => $students,
+                            ]);
+   }
+
+   #[Route('/asc', name: 'student_asc')]
+   public function sortAsc(StudentRepository $studentRepository, ManagerRegistry $registry) {
+       $students = $studentRepository->sortStudentAsc();
+       return $this->render("student/index.html.twig",
+                            [
+                                'students' => $students,
+                            ]);
+   }
+
+   #[Route('/desc', name: 'student_desc')]
+   public function sortDesc(StudentRepository $studentRepository, ManagerRegistry $registry) {
+      
+       $students = $studentRepository->sortStudentDesc();
+       return $this->render("student/index.html.twig",
+                            [
+                                'students' => $students
+                            ]);
+   }
+
+   #[Route('/filter/{id}', name: 'course_filter')]
+   public function filter ($id, ManagerRegistry $registry) {
+       $courses = $registry->getRepository(Course::class)->findAll();
+       $course = $registry->getRepository(Course::class)->find($id);
+       $students = $course->getStudents();
+       return $this->render("student/index.html.twig",
+                            [
+                                    'students' => $students,
+                                    'courses' => $courses
                             ]);
    }
 }

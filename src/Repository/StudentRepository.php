@@ -65,6 +65,30 @@ class StudentRepository extends ServiceEntityRepository
     */
 
     /**
+      * @return Student[]  
+      */
+      public function sortStudentAsc()
+      {
+          return $this->createQueryBuilder('student')
+              ->orderBy('student.name', 'ASC')
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+  
+      /**
+       * @return Student[]  
+       */
+      public function sortStudentDesc()
+      {
+          return $this->createQueryBuilder('student')
+                ->orderBy('student.name', 'DESC')
+                ->getQuery()
+                ->getResult()
+            ;
+      }
+
+    /**
      * @return Student[]  
      */
     public function search($keyword)

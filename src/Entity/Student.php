@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Grade;
+use App\Entity\Course;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentRepository;
 use Doctrine\Common\Collections\Collection;
