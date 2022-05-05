@@ -46,6 +46,10 @@ class TeacherType extends AbstractType
             [
                 'label' => 'Phone',
                 'required' => true,
+                'attr' => [
+                    'minlength' => 9,
+                    'maxlength' => 12
+                ]
             ])
             ->add('course', EntityType::class, [
                 'label' => 'Course Name',

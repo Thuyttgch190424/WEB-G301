@@ -76,16 +76,20 @@ class CourseController extends AbstractController
     public function course_Delete($id, ManagerRegistry $managerRegistry)
     {
         $course = $managerRegistry->getRepository(Course::class)->find($id);
-        if (!$course) {
-            $this->addFlash("Error", "Course not found !");
-            return $this->redirectToRoute("Course_index");
-        }
-        $manager = $managerRegistry->getManager();
-        $manager->remove($course);
-        $manager->flush();
-        $this->addFlash("Success", "Course deleted successfully !");
-        return $this->redirectToRoute("course_index");
-    }
+       if ($course == null) {
+           $this->addFlash("Error", "Course not found !");
+       }
+       else if (count($course->getTeachers()) >= 1) {
+           $this->addFlash("Error", "Can not delete this course !");
+       }
+       else {
+            $manager = $managerRegistry->getManager();
+            $manager->remove($course);
+            $manager->flush();
+            $this->addFlash("Success", "Delete course succeed !");
+       }
+       return $this->redirectToRoute("course_index");
+   }
     #[Route('/edit/{id}', name: 'edit_course')]
     public function course_Edit($id, Request $request, ManagerRegistry $managerRegistry)
     {

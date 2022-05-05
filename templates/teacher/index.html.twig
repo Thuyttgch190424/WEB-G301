@@ -4,13 +4,29 @@
 	<div class="container-fluid col-md-8 text-center">
 		<h2 class="text text-success mb-4">Teacher List</h2>
 		<a class="btn btn-primary mb-3" href="{{ path('add_teacher')}}">ADD TEACHER</a>
+		<h3 class="text text-warning mt-3">
+			{% set total = teachers|length %}
+			{% if total <= 1 %}
+				Total Teachers :
+			{% else %}
+				Total Teachers :
+			{% endif %}
+			{{ total }}
+		</h3>
 		<form action="{{ path('teacher_search') }}" method="post">
 			<input type="search" name="name" id="">
 			<input class="btn btn-success" type="submit" value="Search">
 		</form>
 		<table class="table table-info table-hover mt-5">
 			<tr>
-				<th>ID</th>
+
+				<th>ID
+					<select onchange="window.location.href=this.value">
+						<option>Sort</option>
+						<option value="{{ path('teacher_asc')}}">Ascending</option>
+						<option value="{{ path('teacher_desc')}}">Descending</option>
+					</select>
+				</th>
 				<th>Teacher Name</th>
 				<th>Teacher Phone</th>
 				<th>Teacher Email</th>

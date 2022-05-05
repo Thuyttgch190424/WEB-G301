@@ -78,6 +78,31 @@ class TeacherRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+      * @return Teacher[]  
+      */
+      public function sortTeacherAsc()
+      {
+          return $this->createQueryBuilder('teacher')
+              ->orderBy('teacher.id', 'ASC')
+              ->getQuery()
+              ->getResult()
+          ;
+      }
+  
+      /**
+       * @return Grade[]  
+       */
+      public function sortTeacherDesc()
+      {
+          return $this->createQueryBuilder('teacher')
+                ->orderBy('teacher.id', 'DESC')
+                ->getQuery()
+                ->getResult()
+            ;
+      }
+
+
     /*
     public function findOneBySomeField($value): ?Teacher
     {

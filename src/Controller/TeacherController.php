@@ -110,4 +110,23 @@ class TeacherController extends AbstractController
                                 'teachers' => $teachers
                             ]);
    }
+
+   #[Route('/asc', name: 'teacher_asc')]
+   public function sortAsc(TeacherRepository $teacherRepository, ManagerRegistry $registry) {
+       $teachers = $teacherRepository->sortTeacherAsc();
+       return $this->render("teacher/index.html.twig",
+                            [
+                                'teachers' => $teachers,
+                            ]);
+   }
+
+   #[Route('/desc', name: 'teacher_desc')]
+   public function sortDesc(TeacherRepository $teacherRepository, ManagerRegistry $registry) {
+      
+       $teachers = $teacherRepository->sortTeacherDesc();
+       return $this->render("teacher/index.html.twig",
+                            [
+                                'teachers' => $teachers
+                            ]);
+   }
 }
